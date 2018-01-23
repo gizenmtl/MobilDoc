@@ -1,0 +1,182 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="tr">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>VMWARE WorkStation Pro Sanal Makine Kurulumu &#8212; demo v0.1 -r belgelendirme çalışması</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     'v0.1 -r',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Dizin" href="genindex.html" />
+    <link rel="search" title="Ara" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="vmware-workstation-pro-sanal-makine-kurulumu">
+<h1><strong>VMWARE WorkStation Pro Sanal Makine Kurulumu</strong><a class="headerlink" href="#vmware-workstation-pro-sanal-makine-kurulumu" title="Bu başlığın kalıcı bağlantısı">¶</a></h1>
+<hr class="docutils" />
+<div class="toctree-wrapper compound">
+</div>
+<p>VMware WorkStation programını kurduktan sonra ihtiyacımıza göre sanal bir makine oluşturuyoruz.
+Programı çalıştırıyoruz&gt;File&gt;New Virtual Machine butonunu kullanarak yeni bir sanal makine kuruyoruz.</p>
+</div>
+<div class="section" id="sanal-makinemize-ubuntu-kurulumu">
+<h1><strong>Sanal Makinemize Ubuntu Kurulumu</strong><a class="headerlink" href="#sanal-makinemize-ubuntu-kurulumu" title="Bu başlığın kalıcı bağlantısı">¶</a></h1>
+<hr class="docutils" />
+<p>Karşımıza çıkan ekranda Typical sekmesini işaretliyor ve next diyoruz.Dilersek burada custom seçeneğini seçip kendi konfigürasyonumuzu belirtebiliriz. Ardından kurulum için kaynak dosyamızı seçiyor ve devam ediyoruz. Kaynak dosyasını (.iso uzantılı dosya) zaten indirmiştik.
+Daha sonra bize username ve password bilgisi girmemizi söylüyor. Burada istediğiniz kullanıcı adı ve paralosını girip, next tuşuna basıyoruz. Daha sonraki adımda VM adımızı soruyor varsayılan olarak bırakıp next diyebiliriz ya da dilediğimiz bir ismi burada tanımalayabiliriz. Bu isim VM içerisinde gözükecek olan isimdir.</p>
+<p>Bilgisayarınızın harddisk boyutuna göre 20 gb ve üstü alan seçip ardından split seçeneğini seçiyoruz. Biz 40gblık bir alan seçtiğimizden hız olarak bir fark olmayacaktır. Ancak dilerseniz yine single file seçeneğini seçebilirsiniz.
+Ve finish sekmesine basıp VM ayarlarını bitirip artık kuruluma geçiyoruz. Kurulum başladıktan sonra ise yazılım güncellemeleri otomatik olarak kontrol edilmeye başlar.
+Ubuntu yüklendikten sonra, kullanıcı oluşturmamız için birkaç ufak bilgi soruyor ve kurulum devam ediyor.
+Kurulum tamamlandıktan sonra sisteme login oluyoruz ve sanal makinemizdeki ubuntumuz artık kullanıma hazır :)</p>
+</div>
+<div class="section" id="php-kurulumu">
+<h1><strong>PHP Kurulumu</strong><a class="headerlink" href="#php-kurulumu" title="Bu başlığın kalıcı bağlantısı">¶</a></h1>
+<hr class="docutils" />
+<p><strong>Adım 1</strong>: Ubuntu’yu SSH ile bağlıyoruz ve Ondrej’s PPA ile erişmesini sağlıyoruz.</p>
+<p>$ sudo apt-get install software-properties-common</p>
+<p>$ sudo add-apt-repository ppa:ondrej/php</p>
+<p>$ sudo apt-get update</p>
+<p><strong>Adım 2:</strong> Install PHP 7.1</p>
+<p>$ sudo apt-get install php7.1</p>
+<p><strong>Adım 3:</strong> PHP 7.1 bağımlılıkları ve Modüllerinin yüklenmesi</p>
+<p>$ sudo apt-cache search php7.1</p>
+<p><strong>Adım 4:</strong> Yaygın kullanılan modüllerin yüklenmesi</p>
+<p>$ sudo apt-get install php7.1 php7.1-cli php7.1-common php7.1-json php7.1-opcache php7.1-mysql php7.1-mbstring php7.1-mcrypt php7.1-zip php7.1-fpm</p>
+<p><strong>Adım 5:</strong> php.ini konfigürasyonları</p>
+<p>Yüklemeler tamamlandıktan sonra /etc/php/7.1/cli/php.ini dosyasını açıp, konfigürasyonlarının tamamlanması gerekir.</p>
+<p>$ sudo nano /etc/php/7.1/cli/php.ini ile dosyamızı açıyoruz.</p>
+<p>cgi.fix_pathinfo=0 ile değiştiriyoruz.</p>
+<p>Ardından PHP-FPM servisini yeniden başlatıyoruz.</p>
+<p>$ sudo systemctl restart php7.1-fpm.service</p>
+<p>Artık PHP konfigürasyonlarımız da tamamlandı.</p>
+</div>
+<div class="section" id="nginx-server-kurulumu">
+<h1><strong>NGINX SERVER KURULUMU</strong><a class="headerlink" href="#nginx-server-kurulumu" title="Bu başlığın kalıcı bağlantısı">¶</a></h1>
+<hr class="docutils" />
+<p><strong>Adım 1:</strong> $ sudo apt-get install nginx</p>
+<p><strong>Adım 2:</strong> sites-available klasörünün içine local.example.com adlı bir dosya oluşturmalısınız.</p>
+<p>$ sudo nano /etc/nginx/sites-available</p>
+<p>$ touch local.example.com.conf</p>
+<p><strong>Adım 3:</strong> Domain ismine göre nginx sanal sunucusunu kurma</p>
+<p>$ sudo nano /etc/nginx/sites-available/local.example.com.conf</p>
+<p><strong>Adım 4:</strong> Açılan dosyamızın içinde;</p>
+<dl class="docutils">
+<dt>server {</dt>
+<dd><p class="first">listen 80;
+server_name local.example.com;
+root /www/user_name/public;
+index index.php index.html index.htm;</p>
+<dl class="docutils">
+<dt>location / {</dt>
+<dd>try_files $uri $uri/ =404;</dd>
+</dl>
+<p>}</p>
+<dl class="docutils">
+<dt>location ~ .php$ {</dt>
+<dd>fastcgi_pass unix:/run/php/php7.1-fpm.sock;
+include snippets/fastcgi-php.conf;
+fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</dd>
+</dl>
+<p>}</p>
+<dl class="docutils">
+<dt>location ~ /.ht {</dt>
+<dd>deny all;</dd>
+</dl>
+<p class="last">}</p>
+</dd>
+</dl>
+<p>}</p>
+<p>ile sites-avaible içerisinde oluşturduğumuz linki gerekli yerleri değiştirerek sites-enabled içerisine atmalıyız.</p>
+<p><strong>Adım 5:</strong> Şimdi sites-enabled içerisine kopyalamak için;</p>
+<p>$ ln -s /etc/nginx/sites-avaible/local.example.com /etc/nginx/sites-enabled/local.example.com</p>
+<p><strong>Adım 5:</strong> Nginx konfigürasyonu test etme</p>
+<p>$ sudo nginx -t
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful</p>
+<p><strong>Adım 6:</strong> Eğer “syntax is ok” cevabı aldıysanız, artık Nginx server’ı restart edebilirsiniz</p>
+<p>$ sudo systemctl restart nginx.service</p>
+<p><strong>Adım 7:</strong> Sistem boot’u üzerinden Nginx ve PHP-FPM’e ulaşma</p>
+<p>$ sudo systemctl enable nginx.service</p>
+<p>$ sudo systemctl enable php7.1-fpm.service</p>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Bu başlığın kalıcı bağlantısı">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Dizin</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Modül Dizini</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Arama Sayfası</span></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Hızlı Arama</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Git" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Gizen Mutlu.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
