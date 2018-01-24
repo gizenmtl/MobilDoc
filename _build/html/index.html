@@ -79,6 +79,23 @@ Kurulum tamamlandıktan sonra sisteme login oluyoruz ve sanal makinemizdeki ubun
 <p>$ sudo systemctl restart php7.1-fpm.service</p>
 <p>Artık PHP konfigürasyonlarımız da tamamlandı.</p>
 </div>
+<div class="section" id="composer-php-paket-yoneticisi">
+<h1><strong>COMPOSER PHP PAKET YÖNETİCİSİ</strong><a class="headerlink" href="#composer-php-paket-yoneticisi" title="Bu başlığın kalıcı bağlantısı">¶</a></h1>
+<hr class="docutils" />
+<p><strong>Adım 1:</strong> Yüklemeye başlamadan önce bağımlılıklarımızı ve paketlerimizi güncelleyelim.</p>
+<p>$ sudo apt-get update</p>
+<p><strong>Adım 2:</strong> $ sudo apt-get install curl php-cli php-mbstring git unzip</p>
+<p><strong>Adım 3:</strong> Home klasörümüze gidip composer’ı curl ile yükleyeceğiz.</p>
+<p>$ cd ~</p>
+<p>$ curl -sS <a class="reference external" href="https://getcomposer.org/installer">https://getcomposer.org/installer</a> -o composer-setup.php</p>
+<p>php -r “if (hash_file(‘SHA384’, ‘composer-setup.php’) === ‘669656bab3166a7aff8a7506b8cb2d1c292f042046c5a994c43155c0be6190fa0355160742ab2e1c88d40d5be660b410’) { echo ‘Installer verified’; } else { echo ‘Installer corrupt’; unlink(‘composer-setup.php’); } echo PHP_EOL;”</p>
+<p>Installer verified çıktısı almanız gerekir.</p>
+<p>Şimdi global olarak composer’ı yükleyeceğiz.</p>
+<p>sudo php composer-setup.php –install-dir=/usr/local/bin –filename=composer</p>
+<p>Artık composer’ımız /usr/local/bin klasörümüze yüklendi.</p>
+<p>Yüklememizi test etmek için</p>
+<p>$ composer yazalım ve artık composer’ımız da yüklendi.</p>
+</div>
 <div class="section" id="nginx-server-kurulumu">
 <h1><strong>NGINX SERVER KURULUMU</strong><a class="headerlink" href="#nginx-server-kurulumu" title="Bu başlığın kalıcı bağlantısı">¶</a></h1>
 <hr class="docutils" />
@@ -127,6 +144,71 @@ nginx: configuration file /etc/nginx/nginx.conf test is successful</p>
 <p><strong>Adım 7:</strong> Sistem boot’u üzerinden Nginx ve PHP-FPM’e ulaşma</p>
 <p>$ sudo systemctl enable nginx.service</p>
 <p>$ sudo systemctl enable php7.1-fpm.service</p>
+<p>Artık nginx sunucumuzun da kurulumu tamamlandığına göre, postgresql’e geçebiliriz.</p>
+</div>
+<div class="section" id="postgresql-kurulumu">
+<h1><strong>POSTGRESQL KURULUMU</strong><a class="headerlink" href="#postgresql-kurulumu" title="Bu başlığın kalıcı bağlantısı">¶</a></h1>
+<hr class="docutils" />
+<p><strong>Adım 1:</strong> <a class="reference external" href="https://www.postgresql.org/">https://www.postgresql.org/</a> sitesine girip Download bölümüne tıklıyoruz.</p>
+<p><strong>Adım 2:</strong> Karşımıza çıkan sayfadan kullandığımız Linux işletim sisteminin hangi dağıtımı olduğunu seçtikten sonra
+hangi versiyonunu kullandığımızı da seçmeliyiz.</p>
+<p><strong>Adım 3:</strong> /etc/apt/sources.list.d uzantısının içine pgdg.list dosyası oluşturuyoruz (eğer yoksa).
+Dosyamızı oluşturduktan sonra, içerisine</p>
+<p>deb <a class="reference external" href="http://apt.postgresql.org/pub/repos/apt/">http://apt.postgresql.org/pub/repos/apt/</a> zesty-pgdg main yazıyoruz.</p>
+<p><strong>Adım 4:</strong> Ardından paket listelerini güncellemek ve giriş anahtarını entegre etmek için terminalimize,</p>
+<dl class="docutils">
+<dt>wget –quiet -O - <a class="reference external" href="https://www.postgresql.org/media/keys/ACCC4CF8.asc">https://www.postgresql.org/media/keys/ACCC4CF8.asc</a> | </dt>
+<dd>sudo apt-key add -</dd>
+</dl>
+<p>sudo apt-get update</p>
+<p>yazıyoruz.</p>
+<p><strong>Adım 5:</strong> Konfigürasyonlar ..</p>
+</div>
+<div class="section" id="node-js-npm-kurulumu">
+<h1><strong>Node.js-NPM KURULUMU</strong><a class="headerlink" href="#node-js-npm-kurulumu" title="Bu başlığın kalıcı bağlantısı">¶</a></h1>
+<hr class="docutils" />
+<p><strong>Adım 1:</strong> İlk olarak paketi güncellemeyi alışkanlık haline getirelim.</p>
+<p>$ sudo apt-get update</p>
+<p><strong>Adım 2:</strong> Şimdi Node.js yükleyelim.</p>
+<p>$ sudo apt-get install nodejs</p>
+<p><strong>Adım 3:</strong> Node.js paket yöneticisi npm’i aşağıdaki komut ile kurabiliriz.</p>
+<p>$ sudo apt-get install npm</p>
+</div>
+<div class="section" id="phpstorm-kurulumu">
+<h1><strong>PhpStorm Kurulumu</strong><a class="headerlink" href="#phpstorm-kurulumu" title="Bu başlığın kalıcı bağlantısı">¶</a></h1>
+<hr class="docutils" />
+<p><strong>Adım 1:</strong> <a class="reference external" href="https://www.jetbrains.com/">https://www.jetbrains.com/</a> sitesinden öğrenci hesabınız ile giriş yaptığınızda, JetBrains’in bütün IDE’lerini professionel olarak kullanabilirsiniz.</p>
+<p><strong>Adım 2:</strong> Öğrenci mail adresiniz ile üye olduktan sonra, PhpStorm’u indirip size gelen mail ile entegre etmelisiniz.</p>
+<p><strong>Adım 3:</strong> Yükleme tamamlandıktan sonra projenizi yazmaya başlayabilirsiniz.</p>
+</div>
+<div class="section" id="google-chrome-kurulumu">
+<h1><strong>Google Chrome Kurulumu</strong><a class="headerlink" href="#google-chrome-kurulumu" title="Bu başlığın kalıcı bağlantısı">¶</a></h1>
+<hr class="docutils" />
+<p><strong>Adım 1:</strong> İlk olarak anahtarımızı eklemeliyiz.</p>
+<p>$ wget -q -O - <a class="reference external" href="https://dl-ssl.google.com/linux/linux_signing_key.pub">https://dl-ssl.google.com/linux/linux_signing_key.pub</a> | sudo apt-key add -</p>
+<p><strong>Adım 2:</strong> Repo ile entegre ediyoruz.</p>
+<p>$ echo ‘deb [arch=amd64] <a class="reference external" href="http://dl.google.com/linux/chrome/deb/">http://dl.google.com/linux/chrome/deb/</a> stable main’ | sudo tee /etc/apt/sources.list.d/google-chrome.list</p>
+<p><strong>Adım 3:</strong> Artık paketleri yükleyebiliriz.</p>
+<p>$ sudo apt-get update</p>
+<p>$ sudo apt-get install google-chrome-stable</p>
+<p><strong>Adım 4:</strong> Artık Google Chrome browserımız kullanıma hazır.</p>
+</div>
+<div class="section" id="git-kurulumu-ve-ssh-baglantisi">
+<h1><strong>Git Kurulumu ve ssh Bağlantısı</strong><a class="headerlink" href="#git-kurulumu-ve-ssh-baglantisi" title="Bu başlığın kalıcı bağlantısı">¶</a></h1>
+<hr class="docutils" />
+<p><strong>Adım 1:</strong> $ sudo apt-get update</p>
+<p><strong>Adım 2:</strong> Paketlerimizi güncellediğimize göre artık Git ‘i yükleyebiliriz.</p>
+<p>$ sudo apt-get install git</p>
+<p><strong>Adım 3:</strong> Şimdi Git hesabımızla bilgisayarımızı eşleştirmek için, SSH bağlantısını oluşturmaya başlayacağız.</p>
+<blockquote>
+<div>$ git config –global user.name “Your Name”
+$ git config –global user.email “<a class="reference external" href="mailto:youremail&#37;&#52;&#48;domain&#46;com">youremail<span>&#64;</span>domain<span>&#46;</span>com</a>”</div></blockquote>
+<p><strong>Adım 4:</strong> SSH key’imize ulaşmak için,</p>
+<p>$ cd ~/.ssh</p>
+<p>$ cat id_rsa.pub</p>
+<p>yazdıktan sonra karşımıza çıkan key’i GitHub/GitLab hesabınıza girip Ayarlar &gt; SSH and GPG keys
+yolunu izledikten sonra New SSH Key butonuna basıp, id_rsa.pub dosyasından kopyaladığımız key’imizi buraya yapıştırıyoruz.</p>
+<p>Ve artık bilgisayarımızla Git hesabımız eş zamanlı bir şekilde çalışabilir.</p>
 </div>
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Bu başlığın kalıcı bağlantısı">¶</a></h1>

@@ -76,6 +76,38 @@ $ sudo systemctl restart php7.1-fpm.service
 
 Artık PHP konfigürasyonlarımız da tamamlandı.
 
+**COMPOSER PHP PAKET YÖNETİCİSİ**
+=================================
+
+####
+
+**Adım 1:** Yüklemeye başlamadan önce bağımlılıklarımızı ve paketlerimizi güncelleyelim.
+
+$ sudo apt-get update
+
+**Adım 2:** $ sudo apt-get install curl php-cli php-mbstring git unzip
+
+**Adım 3:** Home klasörümüze gidip composer'ı curl ile yükleyeceğiz.
+
+$ cd ~
+
+$ curl -sS https://getcomposer.org/installer -o composer-setup.php
+
+php -r "if (hash_file('SHA384', 'composer-setup.php') === '669656bab3166a7aff8a7506b8cb2d1c292f042046c5a994c43155c0be6190fa0355160742ab2e1c88d40d5be660b410') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+
+Installer verified çıktısı almanız gerekir.
+
+
+Şimdi global olarak composer'ı yükleyeceğiz.
+
+sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+
+Artık composer'ımız /usr/local/bin klasörümüze yüklendi.
+
+Yüklememizi test etmek için
+
+$ composer yazalım ve artık composer'ımız da yüklendi.
+
 
 **NGINX SERVER KURULUMU**
 =========================
@@ -147,6 +179,112 @@ $ sudo systemctl enable php7.1-fpm.service
 
 
 
+Artık nginx sunucumuzun da kurulumu tamamlandığına göre, postgresql'e geçebiliriz.
+
+
+**POSTGRESQL KURULUMU**
+=======================
+
+####
+
+
+**Adım 1:** https://www.postgresql.org/ sitesine girip Download bölümüne tıklıyoruz.
+
+**Adım 2:** Karşımıza çıkan sayfadan kullandığımız Linux işletim sisteminin hangi dağıtımı olduğunu seçtikten sonra
+hangi versiyonunu kullandığımızı da seçmeliyiz.
+
+**Adım 3:** /etc/apt/sources.list.d uzantısının içine pgdg.list dosyası oluşturuyoruz (eğer yoksa).
+Dosyamızı oluşturduktan sonra, içerisine
+
+deb http://apt.postgresql.org/pub/repos/apt/ zesty-pgdg main yazıyoruz.
+
+**Adım 4:** Ardından paket listelerini güncellemek ve giriş anahtarını entegre etmek için terminalimize,
+
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | \
+  sudo apt-key add -
+sudo apt-get update
+
+yazıyoruz.
+
+**Adım 5:** Konfigürasyonlar ..
+
+
+
+**Node.js-NPM KURULUMU**
+========================
+
+####
+
+**Adım 1:** İlk olarak paketi güncellemeyi alışkanlık haline getirelim.
+
+$ sudo apt-get update
+
+**Adım 2:** Şimdi Node.js yükleyelim.
+
+$ sudo apt-get install nodejs
+
+**Adım 3:** Node.js paket yöneticisi npm'i aşağıdaki komut ile kurabiliriz.
+
+$ sudo apt-get install npm
+
+**PhpStorm Kurulumu**
+=====================
+
+####
+
+**Adım 1:** https://www.jetbrains.com/ sitesinden öğrenci hesabınız ile giriş yaptığınızda, JetBrains'in bütün IDE'lerini professionel olarak kullanabilirsiniz.
+
+**Adım 2:** Öğrenci mail adresiniz ile üye olduktan sonra, PhpStorm'u indirip size gelen mail ile entegre etmelisiniz.
+
+**Adım 3:** Yükleme tamamlandıktan sonra projenizi yazmaya başlayabilirsiniz.
+
+**Google Chrome Kurulumu**
+==========================
+
+####
+
+**Adım 1:** İlk olarak anahtarımızı eklemeliyiz.
+
+$ wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+
+**Adım 2:** Repo ile entegre ediyoruz.
+
+$ echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
+
+**Adım 3:** Artık paketleri yükleyebiliriz.
+
+$ sudo apt-get update
+
+$ sudo apt-get install google-chrome-stable
+
+**Adım 4:** Artık Google Chrome browserımız kullanıma hazır.
+
+**Git Kurulumu ve ssh Bağlantısı**
+==================================
+
+####
+
+**Adım 1:** $ sudo apt-get update
+
+**Adım 2:** Paketlerimizi güncellediğimize göre artık Git 'i yükleyebiliriz.
+
+$ sudo apt-get install git
+
+**Adım 3:** Şimdi Git hesabımızla bilgisayarımızı eşleştirmek için, SSH bağlantısını oluşturmaya başlayacağız.
+
+    $ git config --global user.name "Your Name"
+    $ git config --global user.email "youremail@domain.com"
+
+**Adım 4:** SSH key'imize ulaşmak için,
+
+$ cd ~/.ssh
+
+$ cat id_rsa.pub
+
+yazdıktan sonra karşımıza çıkan key'i GitHub/GitLab hesabınıza girip Ayarlar > SSH and GPG keys
+yolunu izledikten sonra New SSH Key butonuna basıp, id_rsa.pub dosyasından kopyaladığımız key'imizi buraya yapıştırıyoruz.
+
+Ve artık bilgisayarımızla Git hesabımız eş zamanlı bir şekilde çalışabilir.
 
 
 
